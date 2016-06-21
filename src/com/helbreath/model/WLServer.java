@@ -42,7 +42,7 @@ public class WLServer {
 		throw new UnexistantMapException();
 	}
 	
-	private boolean isTileAvailable(String name, Point position){
+	public boolean isTileAvailable(String name, Point position){
 		try{
 			return this.findMapByName(name).isTileAvailable(position.x, position.y);
 		}catch(UnexistantMapException e){
@@ -50,11 +50,11 @@ public class WLServer {
 		}
 	}
 	
-	private void setTileAvailable(String mapName, Point coord){
+	public void setTileAvailable(String mapName, Point coord){
 		this.findMapByName(mapName).setAvailable(coord.x, coord.y);		
 	}
 
-	private void setTileUnavailable(String mapName, Point coord){
+	public void setTileUnavailable(String mapName, Point coord){
 		this.findMapByName(mapName).setUnavailable(coord.x, coord.y);		
 	}
 	
@@ -74,6 +74,22 @@ public class WLServer {
 	private boolean isMapChangeZone(String mapName, Point position){
 		try{
 			return this.findMapByName(mapName).isChangeZoneTile(position.x, position.y);
+		}catch(UnexistantMapException e){
+			throw e;
+		}
+	}
+
+	public Point setStartPosition(String mapName, Point position) {
+		try{
+			return this.findMapByName(mapName).setPosition(position);
+		}catch(UnexistantMapException e){
+			throw e;
+		}
+	}
+
+	public void printMap(String mapName) {
+		try{
+			this.findMapByName(mapName).printMapGrid();
 		}catch(UnexistantMapException e){
 			throw e;
 		}

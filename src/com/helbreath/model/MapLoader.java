@@ -39,7 +39,7 @@ public class MapLoader {
 		this.createMapFromJSONObject(this.readFromJSONFile(MapLoader.PATH + name + ".txt"), map);
 		System.out.println("Map at: " + MapLoader.PATH + name + ".txt" + " loaded.");
 		System.out.println();
-		this.printMapGrid(map);
+		map.printMapGrid();
 	}
 	
 	public void deleteMapFile(String name) throws FileNotFoundException{
@@ -121,19 +121,7 @@ public class MapLoader {
 																					(int)(long)obj.get(MapLoader.WIDTH),
 																					(int)(long)obj.get(MapLoader.HEIGHT)));
 	}
-	
-	private void printMapGrid(Map map){
-		int width = map.getWidth(), height = map.getHeight();
-		
-		for(int i = 0; i < height; i++){
-			System.out.println();
-			for(int j = 0; j < width; j++){
-				System.out.print(map.isTileAvailable(j, i) + " ");
-			}
-		}
-		System.out.println();
-	}
-	
+
 	private boolean[] createBooleanArrayFromJSONArray(JSONArray jsonArr){
 		Iterator<Boolean> iterator = jsonArr.iterator();
 		boolean[] arr = new boolean[jsonArr.size()];
